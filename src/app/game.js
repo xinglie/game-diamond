@@ -354,21 +354,23 @@ module.exports = Magix.View.extend({
             }
             if (r) {
                 lastPos = p;
-                if (lastNode) {
+                if (lastNode && lastNode.length) {
                     lastNode.css({
                         opacity: 1
                     }).removeClass('k6b8-succ').removeClass('k6b8-fail');
                 }
                 if (p) {
                     lastNode = $('#main_' + p.x + '_' + p.y);
-                    lastNode.css({
-                        opacity: 0.7
-                    });
-                    var s = me.findEatList(dragPos, p);
-                    if (s.can) {
-                        lastNode.addClass('k6b8-succ');
-                    } else {
-                        lastNode.addClass('k6b8-fail');
+                    if (lastNode.length) {
+                        lastNode.css({
+                            opacity: 0.7
+                        });
+                        var s = me.findEatList(dragPos, p);
+                        if (s.can) {
+                            lastNode.addClass('k6b8-succ');
+                        } else {
+                            lastNode.addClass('k6b8-fail');
+                        }
                     }
                 }
             }
@@ -402,7 +404,7 @@ module.exports = Magix.View.extend({
                 target.show();
             }
             active.hide();
-            if (lastNode) {
+            if (lastNode && lastNode.length) {
                 lastNode.css({
                     opacity: 1
                 }).removeClass('k6b8-succ').removeClass('k6b8-fail');

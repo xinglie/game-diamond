@@ -352,21 +352,23 @@ module.exports = Magix.View.extend({
             }
             if (r) {
                 lastPos = p;
-                if (lastNode) {
+                if (lastNode && lastNode.length) {
                     lastNode.css({
                         opacity: 1
                     }).removeClass('@game.css:succ').removeClass('@game.css:fail');
                 }
                 if (p) {
                     lastNode = $('#main_' + p.x + '_' + p.y);
-                    lastNode.css({
-                        opacity: 0.7
-                    });
-                    var s = me.findEatList(dragPos, p);
-                    if (s.can) {
-                        lastNode.addClass('@game.css:succ');
-                    } else {
-                        lastNode.addClass('@game.css:fail');
+                    if (lastNode.length) {
+                        lastNode.css({
+                            opacity: 0.7
+                        });
+                        var s = me.findEatList(dragPos, p);
+                        if (s.can) {
+                            lastNode.addClass('@game.css:succ');
+                        } else {
+                            lastNode.addClass('@game.css:fail');
+                        }
                     }
                 }
             }
@@ -400,7 +402,7 @@ module.exports = Magix.View.extend({
                 target.show();
             }
             active.hide();
-            if (lastNode) {
+            if (lastNode && lastNode.length) {
                 lastNode.css({
                     opacity: 1
                 }).removeClass('@game.css:succ').removeClass('@game.css:fail');
