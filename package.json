@@ -1,7 +1,7 @@
 {
-  "name": "xinglie-blog",
+  "name": "xinglie-game",
   "version": "1.0.0",
-  "description": "xinglie's blog",
+  "description": "xinglie's game",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "keywords": [
     "xinglie",
     "magix",
-    "blog"
+    "game"
   ],
   "author": "xinglie.lkf@taobao.com",
   "license": "MIT",
