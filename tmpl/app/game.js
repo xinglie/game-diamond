@@ -386,9 +386,9 @@ module.exports = Magix.View.extend({
                         if (s.isPass) {
                             score = '天才！';
                         } else if (GameResultLevel[s.chess]) {
-                            score = GameResultLevel[s.chess] + ('，还有' + s.chess + '个青蛙');
+                            score = GameResultLevel[s.chess] + '，还有' + s.chess + '个青蛙';
                         } else {
-                            score = '一般';
+                            score = '一般' + '，还有' + s.chess + '个青蛙';
                         }
                         resultNode.append('<br />您的成绩是：' + score);
                         resultNode.append('<br />单击上下一关或重新开始新的游戏');
