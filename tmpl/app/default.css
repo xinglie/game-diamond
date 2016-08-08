@@ -1,0 +1,90 @@
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0
+}
+body {
+    line-height: 1.5;
+    background: #333;
+    -ms-text-autospace: ideograph-alpha ideograph-numeric ideograph-parenthesis; /* 5 */
+    text-spacing: ideograph-alpha ideograph-numeric ideograph-parenthesis; /* 5 */
+}
+img {
+    border: 0;
+    vertical-align: middle
+}
+p {
+    word-wrap: break-word
+}
+ul, ol {
+    list-style: none;
+}
+a {
+    color: #a6a6a6;
+    text-decoration: none;
+    transition: All 1s ease;
+    -webkit-transition: All 1s ease;
+    -moz-transition: All 1s ease;
+    -ms-transition: All 1s ease;
+    -o-transition: All 1s ease;
+}
+a:hover {
+    color: #fff;
+}
+
+
+/* 默认按钮样式 */
+
+.btn {
+  box-sizing: content-box;
+  display: inline-block;
+  border: 1px solid #ddd;
+  *border: 0 none;
+  border-radius: 2px;
+  *margin-right: .3em;
+  margin-bottom: 0;
+  padding: 0 10px;
+  *padding: 1px 10px;
+  width: auto;
+  height: 21px;
+  line-height: 21px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom-color: #bbb !important;
+  background-color: #f4f4f4;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #f8f8f8, #eeeeee);
+}
+
+.btn,
+.btn:hover,
+.btn:visited {
+  color: #333!important;
+}
+
+.btn:hover {
+  box-shadow: none;
+  background-color: #ededed;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+}
+
+.btn:active {
+  background-color: #ebebeb;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #e6e6e6, #f2f2f2);
+}
+
+.playground{
+    width:430px;
+    height:430px;
+    margin:20px auto;
+    border:solid 1px #777;
+    position:relative;
+    background-color: #000;
+}
+.active{
+    position: absolute;
+    display: none;
+}

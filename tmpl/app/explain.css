@@ -1,0 +1,21 @@
+.body{
+    color:#fff;
+    line-height:26px;
+}
+.title{
+    font-size: 24px;
+    font-weight: bold;
+    margin: 30px auto 10px;
+    text-align: center;
+}
+.cnt{
+     position: absolute;
+     top: 83px;
+     left: 28px;
+    width: 373px;
+}
+.start{
+    position: absolute;
+    top: 289px;
+    left: 179px;
+}

@@ -1,0 +1,27 @@
+<table cellpadding="0" cellspacing="1">
+<%for(var i=0,j=size.length;i<j;i++){%>
+    <tr>
+        <%for(var a=0,b=size[i].length;a<b;a++){%>
+        <%if(size[i][a]!=-1){%>
+        <td class="bg" id="main_<%=a%>_<%=i%>">
+            <%if(size[i][a]){%>
+            <img src="src/images/<%=size[i][a]==2?'active':'normal'%>.gif" x="<%=a%>" y="<%=i%>" onselect="return false;" mx-mousedown="dragIt()" />
+            <%}%>
+        </td>
+        <%}else{%>
+        <td></td>
+        <%}%>
+        <%}%>
+    </tr>
+<%}%>
+    <tr>
+        <td colspan="20" class="bottom" id="result">鼠标拖动任意青蛙开始，拖动过程中会有相应的提示</td>
+    </tr>
+</table>
+<div class="info">
+    <div><%=tip%></div>
+    <div><%=desc%></div>
+</div>
+<button class="btn prev" mx-click="prev()">上一关</button>
+<button class="btn next" mx-click="next()">下一关</button>
+<button class="restart btn" mx-click="restart()">重新开始</button>

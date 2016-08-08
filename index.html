@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>独立钻石web版游戏</title>
+        <meta name="keywords" content="行列,前端开发,magix,spa,opoa,js,javascript,game,diamond" />
+        <meta name="description" content="网页版本独立钻石的游戏，2008年闲暇时间写的，那时候正在努力学习javascript"/>
+    </head>
+<body>
+    loading...
+</body>
+<script src="src/libs/sea.js"></script>
+<script src="src/libs/zepto.js"></script>
+<script src="src/libs/magix.js"></script>
+<script src="src/coms/tmpl/index.js"></script>
+<script src="src/app/default.js"></script>
+<script src="src/app/explain.js"></script>
+<script src="src/coms/dragdrop/index.js"></script>
+<script src="src/app/game.js"></script>
+
+<script>
+    (function(){
+        var M=require('magix');
+        M.boot({defaultView:'app/default'});
+    })();
+</script>
+</html>
