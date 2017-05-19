@@ -1,11 +1,12 @@
+'#snippet';
 /*
     author:xinglie.lkf@taobao.com
  */
-var $ = require('zepto');
-var Win = $(window);
-var Doc = $(document);
-var IsW3C = window.getComputedStyle;
-var ClearSelection = function(t) {
+let $ = require('zepto');
+let Win = $(window);
+let Doc = $(document);
+let IsW3C = window.getComputedStyle;
+let ClearSelection = (t) => {
     if ((t = window.getSelection)) {
         t().removeAllRanges();
     } else if ((t = window.document.selection)) {
@@ -13,25 +14,25 @@ var ClearSelection = function(t) {
         else t = null;
     }
 };
-var DragObject;
-var DragPrevent = function(e) {
+let DragObject;
+let DragPrevent = (e) => {
     e.preventDefault();
 };
-var DragMove = function(event) {
+let DragMove = (event) => {
     if (DragObject.iMove) {
         DragObject.move(event);
     }
 };
-var DragMoveEvent = 'mousemove touchmove';
-var DragEndEvent = 'mouseup touchend';
-var DragPreventEvent = 'keydown mousewheel DOMMouseScroll';
-var DragStop = function(e) {
+let DragMoveEvent = 'mousemove touchmove';
+let DragEndEvent = 'mouseup touchend';
+let DragPreventEvent = 'keydown mousewheel DOMMouseScroll';
+let DragStop = (e) => {
     if (DragObject) {
         Doc.off(DragMoveEvent, DragMove)
             .off(DragEndEvent, DragStop)
             .off(DragPreventEvent, DragPrevent);
         Win.off('blur', DragStop);
-        var node = DragObject.node;
+        let node = DragObject.node;
         $(node).off('losecapture', DragStop);
         if (node.setCapture) node.releaseCapture();
         if (DragObject.iStop) {
@@ -42,7 +43,7 @@ var DragStop = function(e) {
 };
 
 module.exports = {
-    begin: function(node, moveCallback, endCallback) {
+    begin(node, moveCallback, endCallback) {
         DragStop();
         if (node) {
             ClearSelection();
@@ -63,8 +64,8 @@ module.exports = {
             $(node).on('losecapture', DragStop);
         }
     },
-    fromPoint: function(x, y) {
-        var node = null;
+    fromPoint(x, y) {
+        let node = null;
         if (document.elementFromPoint) {
             if (!DragPrevent.$fixed && IsW3C) {
                 DragPrevent.$fixed = true;

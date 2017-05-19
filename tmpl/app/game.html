@@ -5,7 +5,7 @@
         <%if(size[i][a]!=-1){%>
         <td class="bg" id="main_<%=a%>_<%=i%>">
             <%if(size[i][a]){%>
-            <img src="src/images/<%=size[i][a]==2?'active':'normal'%>.gif" x="<%=a%>" y="<%=i%>" onselect="return false;" mx-mousedown="dragIt()" />
+            <img src="build/images/<%=size[i][a]==2?'active':'normal'%>.gif" x="<%=a%>" y="<%=i%>" onselect="return false;" mx-mousedown="dragIt()" />
             <%}%>
         </td>
         <%}else{%>

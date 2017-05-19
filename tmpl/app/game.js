@@ -1,3 +1,4 @@
+'#snippet';
 /*
     author:xinglie.lkf@taobao.com
  */
@@ -96,9 +97,8 @@ var GameResultLevel = {
     2: '尖子',
     1: '大师'
 };
-var Tmpl = require('coms/tmpl/index');
 var $ = require('zepto');
-var DD = require('coms/dragdrop/index');
+var DD = require('libs/dragdrop');
 module.exports = Magix.View.extend({
     tmpl: '@game.html',
     ctor: function() {
@@ -123,13 +123,11 @@ module.exports = Magix.View.extend({
     },
     drawStage: function() {
         var me = this;
-        var node = $('#' + me.id);
-        var html = Tmpl(me.tmpl, {
+        me.updater.digest({
             size: me.$map,
             desc: me.$levelDesc,
             tip: me.$levelTip
         });
-        node.html(html);
     },
     changeLevel: function(toNext) {
         var total = GameLevels.length - 1,
@@ -223,7 +221,7 @@ module.exports = Magix.View.extend({
         var ty = pos.y - offset.top;
         var cdx = (tx / 60) | 0;
         var cdy = (ty / 60) | 0;
-        if (!igr || igr.x != cdx || igr.y != cdy) {
+        if ((cdx < me.$map[0].length && cdy < me.$map.length) && (!igr || igr.x != cdx || igr.y != cdy)) {
             result = {
                 x: cdx,
                 y: cdy
@@ -309,7 +307,7 @@ module.exports = Magix.View.extend({
         var me = this;
         var map = me.$map;
         var node = $('#main_' + endPos.x + '_' + endPos.y);
-        node.append('<img src="src/images/normal.gif" x="' + endPos.x + '" y="' + endPos.y + '" mx-mousedown="dragIt()" />');
+        node.append('<img src="build/images/normal.gif" x="' + endPos.x + '" y="' + endPos.y + '" mx-mousedown="dragIt()" />');
         map[startPos.y][startPos.x] = 0;
         map[endPos.y][endPos.x] = 1;
         for (var i = 0, j = eatList.length, item; i < j; i++) {
@@ -320,7 +318,7 @@ module.exports = Magix.View.extend({
     },
     'dragIt<mousedown>': function(e) {
         var me = this;
-        var target = $(e.current);
+        var target = $(e.eventTarget);
         var active = $('#active');
         var offset = target.offset();
         target.hide();

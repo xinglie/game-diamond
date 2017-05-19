@@ -2,37 +2,50 @@ var tmplFolder = 'tmpl'; //template folder
 var srcFolder = 'src'; //source folder
 var buildFolder = 'build'; //build folder
 
-var excludeTmplFolders = [
-    'tmpl/libs'
-];
-var onlyAllows = {
-    '.html': 1,
-    '.css': 1,
-    '.gif': 1,
-    '.jpg': 1
-};
 
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var fs = require('fs');
 var combineTool = require('magix-combine');
 var del = require('del');
+var ts = require('typescript');
+var gulpCopy = require('gulp-copy');
 
 
 combineTool.config({
-    prefix: 'k',
+    compressCss: false,
     tmplFolder: tmplFolder,
     srcFolder: srcFolder,
-    buildFolder: buildFolder,
-    excludeTmplFolders: excludeTmplFolders,
-    onlyAllows: onlyAllows
+    compressCssSelectorNames: true,
+    cssSelectorPrefix: 'x',
+    md5CssFileLen: 1,
+    md5CssSelectorLen: 2,
+    compileBeforeProcessor: function(content, from) {
+        //console.log('compile ',from);
+        var str = ts.transpileModule(content, {
+            compilerOptions: {
+                module: ts.ModuleKind.None
+            }
+        });
+        str = str.outputText.replace('"use strict";', '');
+        str = str.replace('exports.__esModule = true;', ''); //这个的，不要～
+        return str;
+    }
+});
+gulp.task('copyImages', () => {
+    gulp.src(['./tmpl/images/*'])
+        .pipe(gulp.dest('./src/images'));
 });
 
+gulp.task('copyImagesBuild', () => {
+    gulp.src(['./tmpl/images/*'])
+        .pipe(gulp.dest('./build/images'));
+});
 gulp.task('cleanSrc', function() {
     return del(srcFolder);
 });
-gulp.task('combine', ['cleanSrc'], function() {
-    combineTool.combine();
+gulp.task('combine', ['cleanSrc','copyImages'], function() {
+    return combineTool.combine();
 });
 gulp.task('watch', ['combine'], function() {
     watch(tmplFolder + '/**/*', function(e) {
@@ -46,21 +59,25 @@ gulp.task('watch', ['combine'], function() {
 });
 
 var uglify = require('gulp-uglify');
-var cssnano = require('gulp-cssnano');
 gulp.task('cleanBuild', function() {
     return del(buildFolder);
 });
-gulp.task('build', ['cleanBuild'], function() {
-    combineTool.build();
-    gulp.src(buildFolder + '/**/*.js')
-        .pipe(uglify({
-            compress: {
-                drop_console: true
-            }
-        }))
-        .pipe(gulp.dest(buildFolder));
+gulp.task('build', ['cleanBuild','copyImagesBuild'], function() {
+    combineTool.config({
+        compressCss: true
+    });
 
-    gulp.src(buildFolder + '/**/*.css')
-        .pipe(cssnano())
-        .pipe(gulp.dest(buildFolder));
+
+    combineTool.combine().then(() => {
+        gulp.src(srcFolder + '/**/*.js')
+            .pipe(uglify({
+                compress: {
+                    drop_console: true
+                },
+                output: {
+                    ascii_only: true
+                }
+            }))
+            .pipe(gulp.dest(buildFolder));
+    });
 });

@@ -1,3 +1,4 @@
+'#snippet';
 /*
     author:xinglie.lkf@taobao.com
  */
@@ -7,7 +8,7 @@ module.exports = Magix.View.extend({
     tmpl: '@default.html',
     render: function() {
         var me = this;
-        me.setHTML(me.id, me.tmpl);
+        me.updater.digest();
     },
     'toTop<click>': function(e) {
         e.preventDefault();

@@ -13,12 +13,6 @@ img {
     border: 0;
     vertical-align: middle
 }
-p {
-    word-wrap: break-word
-}
-ul, ol {
-    list-style: none;
-}
 a {
     color: #a6a6a6;
     text-decoration: none;

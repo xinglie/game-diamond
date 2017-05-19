@@ -12,7 +12,7 @@ td img{
     margin: 5px;
 }
 .bg{
-    background: url('src/images/bg.jpg') no-repeat;
+    background: url('build/images/bg.jpg') no-repeat;
 }
 .restart{
     position: absolute;
